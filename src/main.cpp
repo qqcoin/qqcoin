@@ -1911,7 +1911,7 @@ bool CBlock::SetBestChain(CTxDB& txdb, CBlockIndex* pindexNew)
         const CBlockLocator locator(pindexNew);
         ::SetBestChain(locator);
     }
-
+    nBestHeightTime = pindexBest->GetBlockTime();   // WM - Record timestamp of new best block.
     // New best block
     hashBestChain = hash;
     pindexBest = pindexNew;
