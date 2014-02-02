@@ -168,6 +168,8 @@ QVariant OptionsModel::data(const QModelIndex & index, int role) const
             return QVariant(bDisplayAddresses);
         case DetachDatabases:
             return QVariant(bitdb.GetDetach());
+        case CPUMining:
+            return QVariant(GetBoolArg("-gen"));
         case Language:
             return settings.value("language", "");
         default:
