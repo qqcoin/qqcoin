@@ -257,6 +257,12 @@ bool OptionsModel::setData(const QModelIndex & index, const QVariant & value, in
             settings.setValue("detachDB", fDetachDB);
             }
             break;
+            case CPUMining: {
+             bool fCPUMining = value.toBool();
+             GenerateBitcoins(fCPUMining, pwalletMain);
+             mapArgs["-gen"] = (fCPUMining ? "1" : "0");
+             }
+             break;
         case Language:
             settings.setValue("language", value);
             break;
