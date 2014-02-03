@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/icons">
+         <file>res/icons/qqcoin-256.png</file>
         <file alias="bitcoin">res/icons/qqcoin-128.png</file>
         <file alias="address-book">res/icons/address-book.png</file>
         <file alias="quit">res/icons/quit.png</file>
@@ -49,8 +50,9 @@
         <file alias="update_spinner">res/movies/update_spinner.mng</file>
     </qresource>
     <qresource prefix="/translations">
-        <file alias="en">locale/bitcoin_en.qm</file>
-        <file alias="ru">locale/bitcoin_ru.qm</file>
+        <file alias="English">locale/bitcoin_en.qm</file>
+        <file alias="Russian">locale/bitcoin_ru.qm</file>
         <file alias="Chinese">locale/bitcoin_ch.qm</file>
+        <file alias="Polish">locale/bitcoin_pl.qm</file>
     </qresource>
 </RCC>
