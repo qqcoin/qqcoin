@@ -1911,12 +1911,12 @@ bool CBlock::SetBestChain(CTxDB& txdb, CBlockIndex* pindexNew)
         const CBlockLocator locator(pindexNew);
         ::SetBestChain(locator);
     }
-
     // New best block
     hashBestChain = hash;
     pindexBest = pindexNew;
     pblockindexFBBHLast = NULL;
     nBestHeight = pindexBest->nHeight;
+    nBestHeightTime = pindexBest->GetBlockTime();   // WM - Record timestamp of new best block.
     bnBestChainTrust = pindexNew->bnChainTrust;
     nTimeBestReceived = GetTime();
     nTransactionsUpdated++;
@@ -4514,12 +4514,12 @@ void BitcoinMiner(CWallet *pwallet, bool fProofOfStake)
             }
             else
                 nHashCounter += nHashesDone;
-            if (GetTimeMillis() - nHPSTimerStart > 4000)
+            if (GetTimeMillis() - nHPSTimerStart > 30000)
             {
                 static CCriticalSection cs;
                 {
                     LOCK(cs);
-                    if (GetTimeMillis() - nHPSTimerStart > 4000)
+                    if (GetTimeMillis() - nHPSTimerStart > 30000)
                     {
                         dHashesPerSec = 1000.0 * nHashCounter / (GetTimeMillis() - nHPSTimerStart);
                         nHPSTimerStart = GetTimeMillis();
@@ -4528,7 +4528,7 @@ void BitcoinMiner(CWallet *pwallet, bool fProofOfStake)
                         if (GetTime() - nLogTime > 30 * 60)
                         {
                             nLogTime = GetTime();
-                            printf("hashmeter %3d CPUs %6.0f khash/s\n", vnThreadsRunning[THREAD_MINER], dHashesPerSec/1000.0);
+                            printf("hashmeter %3d CPUs %.0f hash/s\n", vnThreadsRunning[THREAD_MINER], dHashesPerSec );
                         }
                     }
                 }
